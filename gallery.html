@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eunhye Gallery | Eras</title>
+    <style>
+        /* KEEPING YOUR CORE STYLES */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ba68c8; 
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            color: #ffffff;
+            display: flex;
+            overflow: hidden; 
+        }
+
+        .sidebar {
+            width: 180px;
+            height: 100vh;
+            background-color: #000000;
+            position: fixed;
+            left: 0;
+            top: 0;
+            border-right: 8px dashed #ffffff; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            z-index: 100;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+            text-align: center;
+        }
+
+        .nav-menu a:hover { background-color: #ff66cc; color: #000; }
+
+        .nav-icon {
+          width: 100px; 
+          margin-top: 20px;
+          border: 3px solid white;
+          border-radius: 5px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .main-content {
+            margin-left: 180px; 
+            width: calc(100% - 180px);
+            height: 100vh;
+            overflow-y: auto; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        h1.site-title {
+            font-size: 60px;
+            margin: 0 0 40px 0;
+            text-shadow: 4px 4px 0px #000;
+        }
+
+        /* NEW GALLERY GRID STYLES */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .era-card {
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .era-card:hover {
+            transform: scale(1.05);
+        }
+
+        .era-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 5px solid white;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .era-label {
+            display: block;
+            background: #ff66cc;
+            padding: 5px;
+            font-weight: bold;
+            border: 2px solid white;
+            font-size: 14px;
+        }
+
+        .footer-banner {
+            background: #222;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-icon { width: 60px; height: 60px; object-fit: cover; border: 2px solid #ff66cc; border-radius: 50%; }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="gallery.html" style="background-color: #ff66cc; color: black;">Gallery</a>
+            <a href="forums.html">Eunhye Forums</a>
+            <a href="blog.html">Blog</a>
+            <a href="facts.html">Fun Facts</a>
+            <img src="IMG_1716.jpeg" class="nav-icon" alt="Eunhye Princess hours">
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1 class="site-title">Eras Gallery</h1>
+
+        <div class="gallery-grid">
+            
+            <a href="era_2000.html" class="era-card">
+                <img src="IMG_1959.jpeg" class="era-img">
+                <span class="era-label">2000 - 2003 Era</span>
+            </a>
+
+            <a href="era_2004.html" class="era-card">
+                <img src="IMG_2601.jpeg" class="era-img">
+                <span class="era-label">2004 - 2005 Era</span>
+            </a>
+
+            <a href="era_2006.html" class="era-card">
+                <img src="eh2357.jpeg" class="era-img">
+                <span class="era-label">2006 (Princess Hours)</span>
+            </a>
+
+            <a href="era_2007.html" class="era-card">
+                <img src="133D5A534E4005AC01.jpeg" class="era-img">
+                <span class="era-label">2007 - 2009 Era</span>
+            </a>
+
+            <a href="era_present.html" class="era-card">
+                <img src="IMG_2633.jpeg" class="era-img">
+                <span class="era-label">2019 - Present</span>
+            </a>
+
+        </div>
+
+        <footer class="footer-banner">
+            <img src="IMG_2388.jpeg" class="footer-icon" alt="Eunhye selfie">
+            <span>Made With GitHub Pages 💗</span> 
+        </footer>
+    </div>
+
+</body>
+</html>
