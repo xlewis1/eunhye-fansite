@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2000s Era | Eunhye Fansite</title>
+    <style>
+        /* BASE THEME */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ba68c8; 
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            color: #ffffff;
+            display: flex;
+            overflow: hidden; 
+        }
+
+        /* SIDEBAR (Match Index) */
+        .sidebar {
+            width: 180px;
+            height: 100vh;
+            background-color: #000000;
+            position: fixed;
+            left: 0;
+            top: 0;
+            border-right: 8px dashed #ffffff; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            z-index: 100;
+        }
+
+        .nav-menu {
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-menu a:hover {
+            background-color: #ff66cc; 
+            color: #000;
+        }
+
+        .nav-icon {
+          width: 100px; 
+          margin-top: 20px;
+          border: 3px solid white;
+          border-radius: 5px;
+          display: block;
+          margin: 20px auto;
+        }
+
+        .fansite-button {
+            width: 88px;
+            height: 31px;
+            border: 1px solid white;
+            margin-bottom: 8px;
+            display: block;
+            margin: 5px auto;
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-content {
+            margin-left: 180px; 
+            width: calc(100% - 180px);
+            height: 100vh;
+            overflow-y: auto; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        /* MINI PAGE CONTAINER (Y2K Glass Look) */
+        .mini-page {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 4px solid #00c2ff; /* Cyworld Blue */
+            border-radius: 20px;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .era-title {
+            font-size: 50px;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px #ff66cc;
+        }
+
+        /* IMAGE GRID */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            border: 5px solid white;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            border-color: #00c2ff;
+        }
+
+        /* FOOTER */
+        .footer-banner {
+            background: #222;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-size: 24px;
+            margin-top: 50px;
+        }
+
+        .footer-icon {
+          width: 60px; 
+          height: 60px;
+          object-fit: cover; 
+          border: 2px solid #ff66cc;
+          border-radius: 50%; 
+        }
+
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #ba68c8; }
+        ::-webkit-scrollbar-thumb { background: #ff66cc; border: 2px solid white; }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="forums.html">Eunhye Forums</a>
+            <a href="blog.html">Blog</a>
+            <a href="facts.html">Fun Facts</a>
+            <img src="IMG_1716.jpeg" class="nav-icon" alt="Eunhye Princess hours">
+            
+            <a href="https://xlewis1.github.io/FrutigerAeroFansite/" target="_blank">
+                <img src="3E14C462-646F-4441-A6F2-D5F064E2535C.jpeg" class="fansite-button">
+            </a>
+            <a href="https://xlewis1.github.io/babyvox_fan_site/" target="_blank">
+                <img src="14065FB7-1B91-4A37-A754-A9E5D51FD0FD.jpeg" class="fansite-button">
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="mini-page">
+            <h1 class="era-title">2000s Gallery</h1>
+            
+            <div class="grid-container">
+                <img src="IMG_2388.jpeg" class="grid-item" alt="Icons"> 
+                
+                <img src="daum_64.jpeg" class="grid-item">
+                <img src="1F846A25-67E9-4521-A609-749FE823E2B9.jpeg" class="grid-item">
+                <img src="IMG_1628.jpeg" class="grid-item">
+            </div>
+        </div>
+
+        <footer class="footer-banner">
+            <img src="IMG_2388.jpeg" class="footer-icon" alt="Eunhye selfie">
+            <span>Made With GitHub Pages 💗</span> 
+        </footer>
+    </div>
+
+</body>
+</html>
