@@ -6,8 +6,7 @@
 <title>Eunhye Forums</title>
 
 <style>
-
-/* === YOUR ORIGINAL DESIGN === */
+/* === ORIGINAL DESIGN === */
 body{
     margin:0;
     background:#ba68c8;
@@ -23,6 +22,9 @@ body{
     position:fixed;
     border-right:8px dashed white;
     padding-top:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 .nav-menu a{
@@ -31,6 +33,7 @@ body{
     text-decoration:none;
     font-size:20px;
     padding:12px 0;
+    text-align:center;
 }
 
 .nav-menu a:hover{
@@ -42,6 +45,8 @@ body{
     margin-left:180px;
     padding:40px;
     width:100%;
+    overflow-y:auto;
+    height:100vh;
 }
 
 h1{
@@ -50,12 +55,12 @@ h1{
 }
 
 /* === FORUM STYLING === */
-
 .forum-box{
     background:#ff66cc;
     border:6px solid #00c2ff;
     padding:25px;
     max-width:700px;
+    margin-bottom:50px;
 }
 
 input, textarea{
@@ -73,6 +78,11 @@ button{
     padding:10px 20px;
     font-weight:bold;
     cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#0099cc;
 }
 
 .comment{
@@ -92,10 +102,8 @@ button{
     margin-top:10px;
     font-size:14px;
 }
-
 </style>
 </head>
-
 <body>
 
 <nav class="sidebar">
@@ -105,6 +113,7 @@ button{
 <a href="forums.html">Eunhye Forums</a>
 <a href="blog.html">Blog</a>
 <a href="facts.html">Fun Facts</a>
+<img src="133D5A534E4005AC01.jpeg" width="120" style="margin-top:30px;">
 </div>
 </nav>
 
@@ -112,12 +121,10 @@ button{
 
 <h1>Eunhye Forums</h1>
 
-<img src="133D5A534E4005AC01.jpeg" width="260">
-
 <div class="forum-box">
 
 <h2>Welcome!</h2>
-<p>This is the eunhye forums on my eunhye fansite — feel free to tell me what things you want to see on this fansite.</p>
+<p>This is the Eunhye forums on my Eunhye fansite — feel free to tell me what things you want to see on this fansite.</p>
 
 <form id="comment-form">
 <input type="text" id="name" placeholder="Your name" required>
@@ -134,81 +141,63 @@ button{
 </div>
 
 <script>
-
 /* ================================
-   CONFIG
+   LOCAL STORAGE FORUM
 ================================ */
 
-const API = "https://YOUR-HEROKU-APP.herokuapp.com/v3/entry/github/xlewis1/eunhye-fansite/main/data/forum";
+// Load messages from localStorage
+function loadComments() {
+    const container = document.getElementById("comments");
+    container.innerHTML = "";
 
-/* ================================
-   SUBMIT COMMENT
-================================ */
+    let comments = JSON.parse(localStorage.getItem("eunhyeForum")) || [];
+    comments.reverse().forEach(c => {
+        const div = document.createElement("div");
+        div.className = "comment";
+        div.innerHTML = `<div class="comment-name">${c.name}</div>
+                         <div>${c.message}</div>`;
+        container.appendChild(div);
+    });
 
-document.getElementById("comment-form").addEventListener("submit", async e=>{
-e.preventDefault();
-
-const name = document.getElementById("name").value;
-const message = document.getElementById("message").value;
-const status = document.getElementById("status");
-
-status.innerText="Sending message...";
-
-try{
-
-await fetch(API,{
-method:"POST",
-headers:{ "Content-Type":"application/json" },
-body:JSON.stringify({
-fields:{
-name:name,
-message:message
+    if (comments.length === 0) {
+        container.innerHTML = "No messages yet — be the first!";
+    }
 }
-})
+
+// Handle new comment submission
+document.getElementById("comment-form").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim() || "Anonymous";
+    const message = document.getElementById("message").value.trim();
+    const status = document.getElementById("status");
+
+    if (!message) {
+        status.innerText = "Please write a message.";
+        return;
+    }
+
+    // Get existing comments
+    let comments = JSON.parse(localStorage.getItem("eunhyeForum")) || [];
+
+    // Add new comment
+    comments.push({
+        name: name,
+        message: message,
+        date: new Date().toISOString()
+    });
+
+    // Save back to localStorage
+    localStorage.setItem("eunhyeForum", JSON.stringify(comments));
+
+    status.innerText = "Message posted! 💗";
+    document.getElementById("comment-form").reset();
+
+    loadComments();
 });
 
-status.innerText="Message sent! It will appear after approval 💗";
-document.getElementById("comment-form").reset();
-
-}catch(err){
-status.innerText="Error sending message.";
-}
-
-});
-
-/* ================================
-   LOAD COMMENTS FROM JSON
-================================ */
-
-async function loadComments(){
-
-const container=document.getElementById("comments");
-container.innerHTML="Loading messages...";
-
-try{
-
-const res=await fetch("data/forum/index.json");
-const comments=await res.json();
-
-container.innerHTML="";
-
-comments.reverse().forEach(c=>{
-const div=document.createElement("div");
-div.className="comment";
-div.innerHTML=
-`<div class="comment-name">${c.name}</div>
-<div>${c.message}</div>`;
-container.appendChild(div);
-});
-
-}catch{
-container.innerHTML="No messages yet — be the first!";
-}
-
-}
-
+// Initial load
 loadComments();
-
 </script>
 
 </body>
