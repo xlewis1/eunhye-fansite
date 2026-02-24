@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eunhye Forums</title>
+
+<style>
+
+/* === YOUR ORIGINAL DESIGN === */
+body{
+    margin:0;
+    background:#ba68c8;
+    font-family:"Comic Sans MS", cursive;
+    color:white;
+    display:flex;
+}
+
+.sidebar{
+    width:180px;
+    height:100vh;
+    background:black;
+    position:fixed;
+    border-right:8px dashed white;
+    padding-top:20px;
+}
+
+.nav-menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    padding:12px 0;
+}
+
+.nav-menu a:hover{
+    background:#ff66cc;
+    color:black;
+}
+
+.main-content{
+    margin-left:180px;
+    padding:40px;
+    width:100%;
+}
+
+h1{
+    font-size:70px;
+    text-shadow:4px 4px black;
+}
+
+/* === FORUM STYLING === */
+
+.forum-box{
+    background:#ff66cc;
+    border:6px solid #00c2ff;
+    padding:25px;
+    max-width:700px;
+}
+
+input, textarea{
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+    border:3px dashed white;
+    background:#ffd6f3;
+    font-family:inherit;
+}
+
+button{
+    background:#00c2ff;
+    border:none;
+    padding:10px 20px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.comment{
+    background:#ffd6f3;
+    color:black;
+    margin-top:15px;
+    padding:10px;
+    border-left:6px solid #00c2ff;
+}
+
+.comment-name{
+    font-weight:bold;
+    color:#ff3399;
+}
+
+.status{
+    margin-top:10px;
+    font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="sidebar">
+<div class="nav-menu">
+<a href="index.html">Home</a>
+<a href="gallery.html">Gallery</a>
+<a href="forums.html">Eunhye Forums</a>
+<a href="blog.html">Blog</a>
+<a href="facts.html">Fun Facts</a>
+</div>
+</nav>
+
+<div class="main-content">
+
+<h1>Eunhye Forums</h1>
+
+<img src="133D5A534E4005AC01.jpeg" width="260">
+
+<div class="forum-box">
+
+<h2>Welcome!</h2>
+<p>This is the eunhye forums on my eunhye fansite — feel free to tell me what things you want to see on this fansite.</p>
+
+<form id="comment-form">
+<input type="text" id="name" placeholder="Your name" required>
+<textarea id="message" placeholder="Write a message..." required></textarea>
+<button type="submit">Post Message</button>
+</form>
+
+<div class="status" id="status"></div>
+
+<h3>Fan Messages</h3>
+<div id="comments"></div>
+
+</div>
+</div>
+
+<script>
+
+/* ================================
+   CONFIG
+================================ */
+
+const API = "https://YOUR-HEROKU-APP.herokuapp.com/v3/entry/github/xlewis1/eunhye-fansite/main/data/forum";
+
+/* ================================
+   SUBMIT COMMENT
+================================ */
+
+document.getElementById("comment-form").addEventListener("submit", async e=>{
+e.preventDefault();
+
+const name = document.getElementById("name").value;
+const message = document.getElementById("message").value;
+const status = document.getElementById("status");
+
+status.innerText="Sending message...";
+
+try{
+
+await fetch(API,{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body:JSON.stringify({
+fields:{
+name:name,
+message:message
+}
+})
+});
+
+status.innerText="Message sent! It will appear after approval 💗";
+document.getElementById("comment-form").reset();
+
+}catch(err){
+status.innerText="Error sending message.";
+}
+
+});
+
+/* ================================
+   LOAD COMMENTS FROM JSON
+================================ */
+
+async function loadComments(){
+
+const container=document.getElementById("comments");
+container.innerHTML="Loading messages...";
+
+try{
+
+const res=await fetch("data/forum/index.json");
+const comments=await res.json();
+
+container.innerHTML="";
+
+comments.reverse().forEach(c=>{
+const div=document.createElement("div");
+div.className="comment";
+div.innerHTML=
+`<div class="comment-name">${c.name}</div>
+<div>${c.message}</div>`;
+container.appendChild(div);
+});
+
+}catch{
+container.innerHTML="No messages yet — be the first!";
+}
+
+}
+
+loadComments();
+
+</script>
+
+</body>
+</html>
