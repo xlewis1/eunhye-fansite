@@ -1,0 +1,15 @@
+allowedFields: ["name","message"]
+branch: "main"
+path: "data/forum"
+filename: "comment-{@timestamp}"
+format: "json"
+
+moderation: true
+
+requiredFields: ["message"]
+
+generatedFields:
+  date:
+    type: date
+    options:
+      format: iso8601
